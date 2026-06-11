@@ -1,0 +1,13 @@
+{
+  "itemGroup.serverloginmod": "Example Mod Tab",
+  "block.serverloginmod.example_block": "Example Block",
+  "item.serverloginmod.example_item": "Example Item",
+
+  "serverloginmod.configuration.title": "Server Login Mod Configs",
+  "serverloginmod.configuration.section.serverloginmod.common.toml": "Server Login Mod Configs",
+  "serverloginmod.configuration.section.serverloginmod.common.toml.title": "Server Login Mod Configs",
+  "serverloginmod.configuration.items": "Item List",
+  "serverloginmod.configuration.logDirtBlock": "Log Dirt Block",
+  "serverloginmod.configuration.magicNumberIntroduction": "Magic Number Text",
+  "serverloginmod.configuration.magicNumber": "Magic Number"
+}
