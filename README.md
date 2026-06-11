@@ -1,1 +1,137 @@
-Server Login Mod (NeoForge 1.21.1)A robust server-side security mod for NeoForge that forces players to register and log in via chat before moving, chatting, or interacting. Secure your Minecraft server with mandatory player authentication, password hashing, inventory stashing, and customizable admin approval logic.🛠️ Building & InstallationThis is a Server-Side Only mod. Because pre-built .jar releases are not included by default, you will need to compile the mod from the source code using the included Gradle wrapper.How to BuildClone this repository or download it as a ZIP file and extract it.Open your computer's terminal (or command prompt) and navigate to the extracted folder.Run the following command to compile the mod:Windows: .\gradlew buildMac/Linux: ./gradlew buildOnce the build finishes successfully, navigate to the newly created build/libs folder. You will find the compiled .jar file inside.How to InstallTake the compiled .jar file from the build/libs folder.Drop it into your NeoForge server's mods folder.Start the server! Players do not need to install this mod on their clients to join.🔒 Security FeaturesPlayer Freezing: Unauthenticated players are completely locked. They are given Slowness, Invisibility, Jump Fatigue, and Blindness. Their inventory is temporarily stashed safely away, and they cannot take or deal damage.Interaction & Chat Blocking: Unauthenticated players cannot break/place blocks, send chat messages, or use any non-login commands.Timeout: Players have exactly 60 seconds to log in or register before the server safely kicks them.Encrypted Data: All passwords and security answers are hashed using SHA-256 before being saved to loginmod_auth.json. Admins cannot see player passwords.Open/Closed Server States: Admins can require manual approval for new accounts, or leave the server "Open" for immediate registration.👤 Player CommandsThese commands are available to everyone who joins the server./register <password> <repeat> <question_number> <answer>Description: Creates a new account. You must pick a security question (1-5) and provide an answer. The answer can contain spaces.Example: /register MySecret123 MySecret123 1 Max The DogSecurity Questions:What is the name of your first pet?What city were you born in?What is your mother's maiden name?What was the name of your first school?What is your favorite color?/login <password>Description: Authenticates the player, restoring their inventory and removing all movement/vision restrictions.Example: /login MySecret123/changepassword <new_password> <repeat>Description: Changes your password. You must be logged in to use this command.Example: /changepassword NewPass456 NewPass456/resetpassword <new_password> <repeat> <security_answer>Description: Recovers an account if the password is forgotten. You must be logged out to use this command. The answer must match what you typed during /register.Example: /resetpassword NewPass456 NewPass456 Max The Dog👑 Admin CommandsThese commands require Permission Level 2 (Server Operators / OP). If running from the server terminal console, do not include the / slash./requireapproval <value> [<require_reapproval>]Description: Toggles the server's security mode and determines how "Open Server" players are handled.Argument 1 (value):true = Server is Closed. New registrations go to a pending list.false = Server is Open. New registrations are instantly approved.Argument 2 (require_reapproval - Optional):true = Forces players who registered while the server was Open to get admin approval the next time they join.false = Allows players who registered while the server was Open to continue logging in normally.Examples:/requireapproval false -> Front door is open. Everyone can register and play instantly./requireapproval true true -> Complete Lockdown. New players need approval AND any past "guest" players need approval upon their next login./registerrequestsDescription: Displays a list of all usernames currently waiting in the pending queue./registerrequest <approve|decline> <nickname1> [nickname2...]Description: Approves or declines pending registrations. You can approve or decline multiple players at once by separating their names with spaces.Examples:/registerrequest approve Notch/registerrequest approve Notch Jeb Dinnerbone/revokeapproval <nickname>Description: Revokes a player's approved status and demotes them back to the pending queue. If they are currently online, they will be instantly kicked.Example: /revokeapproval Notch/registeredusersDescription: Displays a list of every approved account on the server. It actively tags each player with either (Admin Approved: Yes) or (Admin Approved: No) so you know exactly how their account was authorized.
+## Server Login Mod (NeoForge 1.21.1) 
+
+A robust server-side security mod for NeoForge that forces players to register and log in via chat before moving, chatting, or interacting. Secure your Minecraft server with mandatory player authentication, password hashing, inventory stashing, and customizable admin approval logic. 
+
+## 🛠 Building & Installation 
+
+This is a Server-Side Only mod. Because pre-built .jar releases are not included by default, you will need to compile the mod from the source code using the included Gradle wrapper. 
+
+## How to Build 
+
+1. Clone this repository or download it as a ZIP file and extract it. 
+
+2. Open your computer's terminal (or command prompt) and navigate to the extracted folder. 
+
+3. Run the following command to compile the mod: 
+
+   - Windows: .\gradlew build 
+
+   - Mac/Linux: ./gradlew build 
+
+4. Once the build finishes successfully, navigate to the newly created build/libs folder. You will find the compiled .jar file inside. 
+
+## How to Install 
+
+1. Take the compiled .jar file from the build/libs folder. 
+
+2. Drop it into your NeoForge server's mods folder. 
+
+3. Start the server! Players do not need to install this mod on their clients to join. 
+
+## 🔒 Security Features 
+
+- Player Freezing: Unauthenticated players are completely locked. They are given Slowness, Invisibility, Jump Fatigue, and Blindness. Their inventory is temporarily stashed safely away, and they cannot take or deal damage. 
+
+- Interaction & Chat Blocking: Unauthenticated players cannot break/place blocks, send chat messages, or use any non-login commands. 
+
+- Timeout: Players have exactly 60 seconds to log in or register before the server safely kicks them. 
+
+- Encrypted Data: All passwords and security answers are hashed using SHA-256 before being saved to loginmod_auth.json . Admins cannot see player passwords. 
+
+- Open/Closed Server States: Admins can require manual approval for new accounts, or leave the server "Open" for immediate registration. 
+
+## 👤 Player Commands 
+
+These commands are available to everyone who joins the server. 
+
+## /register <password> <repeat> <question_number> <answer> 
+
+- Description: Creates a new account. You must pick a security question (1-5) and provide an answer. The answer can contain spaces. 
+
+- Example: /register MySecret123 MySecret123 1 Max The Dog 
+
+## Security Questions: 
+
+1. What is the name of your first pet? 
+
+2. What city were you born in? 
+
+3. What is your mother's maiden name? 
+
+4. What was the name of your first school? 
+
+5. What is your favorite color? 
+
+## /login <password> 
+
+- Description: Authenticates the player, restoring their inventory and removing all movement/vision restrictions. 
+
+Example: /login MySecret123 
+
+/changepassword <new_password> <repeat> 
+
+- Description: Changes your password. You must be logged in to use this command. 
+
+- Example: /changepassword NewPass456 NewPass456 
+
+/resetpassword <new_password> <repeat> <security_answer> 
+
+- Description: Recovers an account if the password is forgotten. You must be logged out to use this command. The answer must match what you typed during /register . 
+
+- Example: /resetpassword NewPass456 NewPass456 Max The Dog 
+
+## 👑 Admin Commands 
+
+These commands require Permission Level 2 (Server Operators / OP). If running from the server terminal console, do not include the / slash. 
+
+/requireapproval <value> [<require_reapproval>] 
+
+- Description: Toggles the server's security mode and determines how "Open Server" players are handled. 
+
+- Argument 1 ( value ): 
+
+   - true = Server is Closed. New registrations go to a pending list. 
+
+   - false = Server is Open. New registrations are instantly approved. 
+
+- Argument 2 ( require_reapproval - Optional): 
+
+- true = Forces players who registered while the server was Open to get admin approval the 
+
+- next time they join. 
+
+- false = Allows players who registered while the server was Open to continue logging in 
+
+- normally. 
+
+## Examples: 
+
+- /requireapproval false -> Front door is open. Everyone can register and play instantly. 
+
+- /requireapproval true true -> Complete Lockdown. New players need approval AND 
+
+- any past "guest" players need approval upon their next login. 
+
+## /registerrequests 
+
+Description: Displays a list of all usernames currently waiting in the pending queue. 
+
+- /registerrequest <approve|decline> <nickname1> [nickname2...] 
+
+   - Description: Approves or declines pending registrations. You can approve or decline multiple players at once by separating their names with spaces. 
+
+## Examples: 
+
+- /registerrequest approve Notch 
+
+- /registerrequest approve Notch Jeb Dinnerbone 
+
+## /revokeapproval <nickname> 
+
+- Description: Revokes a player's approved status and demotes them back to the pending queue. If they are currently online, they will be instantly kicked. 
+
+- Example: /revokeapproval Notch 
+
+## /registeredusers 
+
+- Description: Displays a list of every approved account on the server. It actively tags each player with either (Admin Approved: Yes) or (Admin Approved: No) so you know exactly how their account was authorized. 
