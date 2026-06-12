@@ -14,6 +14,8 @@ out/
 
 .run/
 loginmod_auth.json
+docs
+.gitignore
 
 ### Eclipse ###
 .apt_generated

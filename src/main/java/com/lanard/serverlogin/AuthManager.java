@@ -211,4 +211,8 @@ public class AuthManager {
     public static void setLoggedIn(UUID uuid, boolean status) {
         loggedInSession.put(uuid, status);
     }
+
+    public static void clearSession(UUID uuid) {
+        loggedInSession.remove(uuid);
+    }
 }

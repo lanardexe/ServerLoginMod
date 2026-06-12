@@ -173,8 +173,9 @@ public class ServerLoginMod {
     @SubscribeEvent
     public static void onPlayerLogOut(PlayerEvent.PlayerLoggedOutEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
+            AuthManager.clearSession(player.getUUID());
             loginPositions.remove(player.getUUID());
-            joinTimes.remove(player.getUUID()); 
+            joinTimes.remove(player.getUUID());
             ItemStack[] stash = stashedInventories.remove(player.getUUID());
             if (stash != null) {
                 for (int i = 0; i < stash.length; i++) {
@@ -339,25 +340,6 @@ public class ServerLoginMod {
                 player.sendSystemMessage(Component.literal("§aPassword successfully changed!"));
                 return 1;
             }))));
-
-        event.getDispatcher().register(Commands.literal("unregister")
-            .requires(source -> source.hasPermission(2))
-            .then(Commands.argument("nickname", StringArgumentType.word())
-            .executes(context -> {
-                CommandSourceStack source = context.getSource();
-                String target = StringArgumentType.getString(context, "nickname");
-
-                if (!AuthManager.isApproved(target)) {
-                    source.sendFailure(Component.literal("Player " + target + " is not an approved user."));
-                    return 1;
-                }
-                
-                ServerPlayer targetPlayer = source.getServer().getPlayerList().getPlayerByName(target);
-                if (targetPlayer != null) {
-                    targetPlayer.connection.disconnect(Component.literal("§cYour account has been unregistered by an administrator."));
-                }
-                return 1;
-            })));
 
         event.getDispatcher().register(Commands.literal("registerrequests")
             .requires(source -> source.hasPermission(2))
